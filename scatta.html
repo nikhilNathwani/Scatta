@@ -23,10 +23,14 @@
 	  yN= 100 //rightmost value on y-axis
 	  yAxisLoc= 0 //value along x-axis where y-axis should be drawn
 	  
-	  padding= 50
-	  
 	  tX= 5; //number of graph ticks on x-axis
 	  tY= 5; //number of graph ticks on y-axis
+	  
+	  graphTitleText= "Graph Title";
+	  xAxisLabelText= "X-Axis Label";
+	  yAxisLabelText= "Y-Axis Label";
+	  
+	  padding= 50 //specifies breathing-room around graph for title/axis labels
 	  
 	  //Container SVG w/ specified width and height
 	  var graph= d3.select("body")
@@ -119,28 +123,25 @@
 					  .attr("x",w/2)
 					  .attr("y",padding/2 + titleSize/4)
 					  .attr("font-size",titleSize)
-					  .attr("fill","black")
 					  .attr("text-anchor","middle")
-					  .text("Graph Title")
+					  .text(graphTitleText)
 		var xLabel= graph.append("text")
 					  .attr("class","label")
 					  .attr("id","title")
 					  .attr("x",w/2)
 					  .attr("y",h - padding/2 + axisLabelSize/4)
 					  .attr("font-size",axisLabelSize)
-					  .attr("fill","black")
 					  .attr("text-anchor","middle")
-					  .text("X-Axis Label")
+					  .text(xAxisLabelText)
 		var yLabel= graph.append("text")
 					  .attr("class","label")
 					  .attr("id","title")
 					  .attr("x",padding/2 + axisLabelSize/4)
 					  .attr("y",h/2)
 					  .attr("font-size",axisLabelSize)
-					  .attr("fill","black")
 					  .attr("text-anchor","middle")
 					  .attr("transform","rotate(-90 "+(padding/2 + axisLabelSize/4)+","+(h/2)+")")
-					  .text("Y-Axis Label")
+					  .text(yAxisLabelText)
 		
 	</script>
 
