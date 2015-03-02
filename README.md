@@ -1,7 +1,7 @@
 Scatta
 ==========
 
-This reusable, flexible D3 plot template can be pasted into your HTML and modified as needed. I use it for several visualization projects, e.g. [this one](http://nikhil-nathwani.com/viz/roi/roi.html).
+This reusable, flexible D3 plot template can be pasted into your HTML and modified as needed. I use it for several data visualization projects, e.g. [this one](http://nikhil-nathwani.com/viz/roi/roi.html).
 
 ##How it looks by default
 Below you'll see how this template looks without any additional customization. The next section explains how you may easily customize the formatting and look of it. 
