@@ -3,6 +3,11 @@ Scatta
 
 This reusable, flexible D3 plot template can be pasted into your HTML and modified as needed. I use it for several visualization projects, e.g. [this one](http://nikhil-nathwani.com/viz/roi/roi.html).
 
+##How it looks by default
+Below you'll see how this template looks without any additional customization. The next section explains how you may easily customize the formatting and look of it. 
+
+![scattaDefault](http://i.imgur.com/ZyvpsNR.png)
+
 ##How to customize the template
 Catering this template to your specific needs is simple. It is controlled by just 5 sets of variables assigned at the start of the script tag in "scatta.html":
 
