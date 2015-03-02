@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>Nikhil Nathwani -- D3 Scatter Plot</title>
+    <link type="text/css" rel="stylesheet" href="scatta.css" />
+	<script type="text/javascript" src="d3/d3.js"></script>
+	<script src="http://dimplejs.org/dist/dimple.v2.1.0.min.js"></script>
+  </head>
+  <body>
+
+	<script type="text/javascript">
+	
+	  w= 600; //width of the graph's container
+	  h= 600; //height of the graph's container
+	  
+	  x0= -20 //leftmost value on x-axis
+	  xN= 80 //rightmost value on x-axis
+	  xAxisLoc= 15 //value along y-axis where x-axis should be drawn
+
+	  y0= 0 //leftmost value on y-axis
+	  yN= 100 //rightmost value on y-axis
+	  yAxisLoc= 0 //value along x-axis where y-axis should be drawn
+	  
+	  padding= 50
+	  
+	  tX= 5; //number of graph ticks on x-axis
+	  tY= 5; //number of graph ticks on y-axis
+	  
+	  //Container SVG w/ specified width and height
+	  var graph= d3.select("body")
+				  .append("svg")
+				  .attr("width", w)
+				  .attr("height", h)
+				  
+	  //Defining the scales and axes
+	  var xScale = d3.scale.linear()
+					  .domain([x0, xN])
+					  .range([padding, w-padding]);		  
+	  var yScale = d3.scale.linear()
+					  .domain([y0, yN])
+					  .range([h-padding, padding]);
+	  var xAxis = d3.svg.axis()
+					  .scale(xScale)
+					  .ticks(tX)
+					  .orient("bottom")
+					  .tickFormat(d3.format("d"));
+	  var yAxis = d3.svg.axis()
+					  .scale(yScale)
+					  .ticks(tY)
+					  .orient("left")
+					  .tickFormat(d3.format("d"));
+
+
+	  //Drawing rect on graph for backgroud color
+	  graph.append("rect")
+			.attr("id","backgroundRect")
+			.attr("x", xScale(x0))
+			.attr("y", yScale(yN))
+			.attr("width",(w-padding)-(padding))
+			.attr("height",(h-padding)-(padding))
+
+
+	  //Drawing lines on graph
+	  lines= graph.append("g")
+					.attr("id","lines")
+
+	  verticals= lines.append("g")
+						.attr("id","verticalLines")
+	  verticals.selectAll("line")
+				.data(xAxis.scale().ticks(tX)) //a line corresp. to every tick
+				.enter()
+				.append("line")
+				.attr("x1",function(d) {
+					return xScale(d);
+				})
+				.attr("x2",function(d) {
+					return xScale(d);
+				})
+				.attr("y1", yScale(y0))
+				.attr("y2", yScale(yN))
+
+	  horizontals= lines.append("g")
+						.attr("id","horizonalLines")
+	  horizontals.selectAll("line")
+				.data(yAxis.scale().ticks(tY)) //a line corresp. to every tick
+				.enter()
+				.append("line")
+				.attr("x1", xScale(x0))
+				.attr("x2", xScale(xN))
+				.attr("y1",function(d) {
+					return yScale(d);
+				})
+				.attr("y2",function(d) {
+					return yScale(d);
+				})
+
+
+	  //Drawing the axes
+	  graph.append("g")
+		  .attr("class", "axis")
+		  .attr("id","xAxis")
+		  .attr("transform", "translate("+0+"," + yScale(xAxisLoc) + ")")
+		  .call(xAxis);
+	  graph.append("g")
+		  .attr("class", "axis")
+		  .attr("id","yAxis")
+		  .attr("transform", "translate("+ xScale(yAxisLoc) +"," + 0 + ")")
+		  .call(yAxis);
+		
+		  
+	  //Writing title and axis labels
+	  var titleSize= 30
+	  var axisLabelSize= 18
+	  var title= graph.append("text")
+					  .attr("class","label")
+					  .attr("id","title")
+					  .attr("x",w/2)
+					  .attr("y",padding/2 + titleSize/4)
+					  .attr("font-size",titleSize)
+					  .attr("fill","black")
+					  .attr("text-anchor","middle")
+					  .text("Graph Title")
+		var xLabel= graph.append("text")
+					  .attr("class","label")
+					  .attr("id","title")
+					  .attr("x",w/2)
+					  .attr("y",h - padding/2 + axisLabelSize/4)
+					  .attr("font-size",axisLabelSize)
+					  .attr("fill","black")
+					  .attr("text-anchor","middle")
+					  .text("X-Axis Label")
+		var yLabel= graph.append("text")
+					  .attr("class","label")
+					  .attr("id","title")
+					  .attr("x",padding/2 + axisLabelSize/4)
+					  .attr("y",h/2)
+					  .attr("font-size",axisLabelSize)
+					  .attr("fill","black")
+					  .attr("text-anchor","middle")
+					  .attr("transform","rotate(-90 "+(padding/2 + axisLabelSize/4)+","+(h/2)+")")
+					  .text("Y-Axis Label")
+		
+	</script>
+
+	
+  </body>
+</html>
